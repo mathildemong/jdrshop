@@ -1,15 +1,21 @@
 
 const express = require('express');
 const { connect } = require('./bd/connect');
-const routesUtilisateur = require("./route/utilisateur");
+// Routes for router
+const utilisateurRoutes = require('./routes/utilisateur')
+const userRoutes = require('./routes/user')
+const productRoutes = require('./routes/product')
 const app = express();
 
 app.use(express.urlencoded({ extended: true}));
 app.use(express.json());
 
-appUse("/api/v1", routesUtilisateur);
+app.use("/api/v1", utilisateurRoutes)
+app.use("/api/v1", userRoutes)
+app.use("/api/v1", productRoutes)
 
-connect( "mongodb://127.0.0.1:27017/", (erreur) => {   // mongodb+srv://mmonguillon:mercure10@jdrshop.vpc0shq.mongodb.net/ ?? 
+// Please replace the following url with what you use :) 
+connect('mongodb://root:example@localhost:27017/?authSource=admin', (erreur) => {  
     if(erreur) {
     console.log("erreur a la conection a la base de donnee");
     process.exit(-1);
