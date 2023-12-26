@@ -1,94 +1,117 @@
-const { ObjectID } = require("bson");
+const {
+  ObjectId
+} = require("mongodb");
 const client = require("../bd/connect");
-const { User } = require("../models/user");
+const {
+  User
+} = require("../models/user");
 
 const addUser = async (req, res) => {
   try {
-    let user = new User(
+    const user = new User(
       req.body.name,
       req.body.adress,
       req.body.phone,
     );
-    let result = await client
+    const result = await client
       .bd()
       .collection("users")
       .insertOne(user);
 
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } catch (error) {
-    console.log(error);
-    res.status(501).json(error);
+    return res.status(501).json(error);
   }
 };
 
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (_, res) => {
   try {
-    let cursor = client
+    const cursor = client
       .bd()
       .collection("users")
       .find()
-      .sort({ name: 1 });
-    let result = await cursor.toArray();
-    if (result.length > 0) {
-      res.status(200).json(result);
-    } else {
-      res.status(204).json({ msg: "Aucun utilisateur trouvé" });
+      .sort({
+        name: 1
+      });
+    const result = await cursor.toArray();
+    if (result) {
+      return res.status(200).json(result);
     }
   } catch (error) {
     console.log(error);
-    res.status(501).json(error);
+    return res.status(501).json(error);
   }
 };
 
 const getUser = async (req, res) => {
   try {
-    let id = new ObjectID(req.params.id);
-    let cursor = client.bd().collection("users").find({ _id: id });
-    let result = await cursor.toArray();
-    if (result.length > 0) {
-      res.status(200).json(result[0]);
+    const id = new ObjectId(req.params.id);
+    const cursor = client.bd().collection("users").find({
+      _id: id
+    });
+    const [result] = await cursor.toArray();
+    if (result) {
+      return res.status(200).json(result);
     } else {
-      res.status(204).json({ msg: "Cet utilisateur n'existe pas" });
+      return res.status(404).json({
+        msg: "Cet utilisateur n'existe pas"
+      });
     }
   } catch (error) {
     console.log(error);
-    res.status(501).json(error);
+    return res.status(501).json(error);
   }
 };
 
 const updateUser = async (req, res) => {
   try {
-    let id = new ObjectID(req.params.id);
-    let name = req.body.name;
-    let adress = req.body.adress;
-    let phone = req.body.phone;
-    let result = await client
+    const id = new ObjectId(req.params.id);
+    const {name, adress, phone} = req.params
+    const result = await client
       .bd()
       .collection("users")
-      .updateOne({ _id: id }, { $set: { name, adress, phone } });
+      .updateOne({
+        _id: id
+      }, {
+        $set: {
+          name,
+          adress,
+          phone
+        }
+      });
 
     if (result.modifiedCount === 1) {
-      res.status(200).json({ msg: "Modification réussie" });
+      return res.status(200).json({
+        msg: "Modification réussie"
+      });
     } else {
-      res.status(404).json({ msg: "Cet utilisateur n'existe pas" });
+      return res.status(404).json({
+        msg: "Cet utilisateur n'existe pas"
+      });
     }
   } catch (error) {
     console.log(error);
-    res.status(501).json(error);
+    return res.status(501).json(error);
   }
 };
 
 const deleteUser = async (req, res) => {
   try {
-    let id = new ObjectID(req.params.id);
-    let result = await client
+    const id = new ObjectId(req.params.id);
+    const result = await client
       .bd()
       .collection("users")
-      .deleteOne({ _id: id });
+      .deleteOne({
+        _id: id
+      });
     if (result.deletedCount === 1) {
-      res.status(200).json({ msg: "Suppression réussie" });
+      res.status(200).json({
+        msg: "Suppression réussie"
+      });
     } else {
-      res.status(404).json({ msg: "Cet utilisateur n'existe pas" });
+      res.status(404).json({
+        msg: "Cet utilisateur n'existe pas"
+      });
     }
   } catch (error) {
     console.log(error);

@@ -1,100 +1,123 @@
-const { ObjectID } = require("bson");
+const {
+  ObjectId
+} = require("mongodb");
 const client = require("../bd/connect");
-const { Product } = require("../models/products");
+const {
+  Product
+} = require("../models/products");
 
 const addProduct = async (req, res) => {
   try {
-    let user = new Product(
-      req.body.productId,
+    const product = new Product(
       req.body.name,
-      req.body.category,
-      req.body.creationDate,
+      req.body.category
     );
-    let result = await client
+    const result = await client
       .bd()
       .collection("products")
       .insertOne(product);
-
-    res.status(200).json(result);
+    return res.status(200).json(result);
   } catch (error) {
     console.log(error);
-    res.status(501).json(error);
+   return res.status(500).json(error);
   }
 };
 
 const getAllProducts = async (req, res) => {
   try {
-    let cursor = client
+    const cursor = client
       .bd()
       .collection("products")
       .find()
-      .sort({ name: 1 });
-    let result = await cursor.toArray();
-    if (result.length > 0) {
-      res.status(200).json(result);
-    } else {
-      res.status(204).json({ msg: "Aucun produit trouvé" });
-    }
+      .sort({
+        name: 1
+      });
+
+    const result = await cursor.toArray();
+    return res.status(200).json(result);
   } catch (error) {
     console.log(error);
-    res.status(501).json(error);
+    return res.status(501).json(error);
   }
 };
 
 const getProduct = async (req, res) => {
   try {
-    let id = new ObjectID(req.params.id);
-    let cursor = client.bd().collection("products").find({ _id: id });
-    let result = await cursor.toArray();
-    if (result.length > 0) {
-      res.status(200).json(result[0]);
+    const id = new ObjectId(req.params.id);
+    const cursor = client.bd().collection("products").find({
+      _id: id
+    });
+    const [result] = await cursor.toArray();
+    if (result) {
+      return res.status(200).json({
+        ...result,
+      createdAt : new ObjectId(result._id).getTimestamp()});
     } else {
-      res.status(204).json({ msg: "Ce produit n'existe pas" });
+      return res.status(404).json({
+        msg: "Ce produit n'existe pas"
+      });
     }
   } catch (error) {
     console.log(error);
-    res.status(501).json(error);
+    return res.status(500).json(error);
   }
 };
 
 const updateProduct = async (req, res) => {
   try {
-    let id = new ObjectID(req.params.id);
-    let name = req.body.name;
-    let productId = req.body.productId;
-    let category = req.body.category;
-    let result = await client
+    const id = new ObjectId(req.params.id);
+    const {
+      name,
+      category
+    } = req.body
+    const result = await client
       .bd()
       .collection("products")
-      .updateOne({ _id: id }, { $set: { name, productId, category } });
+      .updateOne({
+        _id: id
+      }, {
+        $set: {
+          name,
+          category
+        }
+      });
 
     if (result.modifiedCount === 1) {
-      res.status(200).json({ msg: "Modification réussie" });
+      return res.status(200).json({
+        msg: "Modification réussie"
+      });
     } else {
-      res.status(404).json({ msg: "Ce produit n'existe pas" });
+      return res.status(404).json({
+        msg: "Ce produit n'existe pas"
+      });
     }
   } catch (error) {
     console.log(error);
-    res.status(501).json(error);
+    return res.status(500).json(error);
   }
 };
 
 const deleteProduct = async (req, res) => {
   try {
-    let id = new ObjectID(req.params.id);
-    let result = await client
+    const id = new ObjectId(req.params.id);
+    const result = await client
       .bd()
       .collection("products")
-      .deleteOne({ _id: id });
+      .deleteOne({
+        _id: id
+      });
     if (result.deletedCount === 1) {
-      res.status(200).json({ msg: "Suppression réussie" });
+      return res.status(200).json({
+        msg: "Suppression réussie"
+      });
     } else {
-      res.status(404).json({ msg: "Ce produit n'existe pas" });
+      return res.status(404).json({
+        msg: "Ce produit n'existe pas"
+      });
     }
   } catch (error) {
     console.log(error);
-
-    res.status(501).json(error);
+    return res.status(501).json(error);
   }
 };
 

@@ -4,8 +4,8 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run:dev": "nodemon app.js",
-    "run:db": "docker-compose up"
+    "dev": "nodemon app.js",
+    "db": "docker-compose up"
   },
   "author": "",
   "license": "ISC",

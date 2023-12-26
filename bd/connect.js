@@ -2,23 +2,21 @@ const {MongoClient, Db} = require('mongodb')
 
 let client = null;
 
-function connect(url, callback){
+async function connect(url, callback){
   console.log(`Trying to connect to ${url} ...`)
   if (client == null){
     client = new MongoClient(url, {
       connectTimeoutMS: 1000,
       
     });
-    client.connect().then((theClient) => {
-      console.log('Connected, returning...')
-      client = theClient
+    try {
+      await client.connect()
       return callback()
-    })
-    .catch((err) => {
-      callback(err)
-    })
+    } catch (err) {
+      return callback(err) 
+    }
   } else {
-    callback();
+    return  callback();
   }
 }
 function bd(){
