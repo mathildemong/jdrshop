@@ -11,7 +11,8 @@ class User{
         this.phone = phone;
         this.mail = mail;
         this.password = password;
-        this.creationDate = creationDate;
+        //this.creationDate = creationDate; //Creation Date is infer in userId
+
 
     }
 }
