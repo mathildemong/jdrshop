@@ -1,0 +1,8 @@
+.Login{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    height: 100vh;
+    margin-top: 100px;
+
+}
