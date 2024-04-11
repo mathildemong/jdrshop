@@ -1,8 +1,18 @@
 .Login{
+    height: 90vh;
     display: flex;
-    justify-content: center;
-    flex-direction: row;
-    height: 100vh;
-    margin-top: 100px;
+  flex-direction: column;
+ margin-top: 200px;
 
 }
+
+
+.form1{
+  margin-left: 23px;
+}
+
+button.btn{
+  margin-left: 60px;
+  margin-top: 20px;
+}
+

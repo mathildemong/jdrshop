@@ -6,7 +6,6 @@
     flex-direction: row;
   }
 
-  
   .navbar .leftSide {
     flex: 50%;
     height: 100%;
@@ -16,7 +15,7 @@
   }
   
   .navbar .leftSide img {
-    width: 120px;
+    width: 100px;
     transition: transform .2s; /* Animation */
   }
 
@@ -34,6 +33,7 @@
      /* Animation */
   }
   
+
   .navbar a {
     color: white;
     text-decoration: none;
@@ -51,6 +51,7 @@
   
   .navbar .rightSide svg {
     font-size: 40px;
+ 
   }
   
   .navbar #open {

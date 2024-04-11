@@ -11,7 +11,7 @@ function Home() {
 <div className="headerContainer">
         <h1>JDR SHOP</h1>
         <p>Bienvenue dans notre univers</p>
-        <Link to='/menu'>
+        <Link to='/shop'>
         <button>order now</button>
         </Link>
         </div>

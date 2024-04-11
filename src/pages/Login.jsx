@@ -16,7 +16,7 @@ event.preventDefault();
   <div className="Login">
      <Form onSubmit={handleSubmit}>
     <Form.Group size="lg" controlId="email">
-      <Form.Label>Email</Form.Label>
+      <Form.Label className="form1">Email</Form.Label>
       <Form.Control autoFocus type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
      </Form.Group>
         <Form.Group size="lg" controlId="password">
