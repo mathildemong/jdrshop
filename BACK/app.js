@@ -2,7 +2,6 @@
 const express = require('express');
 const { connect } = require('./bd/connect');
 // Routes for router
-
 const userRoutes = require('./routes/user')
 const productRoutes = require('./routes/product')
 const app = express();

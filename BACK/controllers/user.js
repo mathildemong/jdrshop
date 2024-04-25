@@ -63,6 +63,28 @@ const getUser = async (req, res) => {
   }
 };
 
+
+const login = async (req, res) => {
+  try {
+    const {email, password}= req.body;
+    const cursor = client.bd().collection("users").find({
+      _email: email,
+      _password: password
+    });
+    const result = await cursor.tojson(); 
+    if (result) {
+      return res.status(200).json(result);
+    } else {
+      return res.status(404).json({
+        msg: "Cet utilisateur n'existe pas"
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(501).json(error);
+  }
+};
+
 const updateUser = async (req, res) => {
   try {
     const id = new ObjectId(req.params.id);
@@ -123,6 +145,7 @@ const deleteUser = async (req, res) => {
 module.exports = {
   addUser,
   getAllUsers,
+  login,
   getUser,
   updateUser,
   deleteUser,
