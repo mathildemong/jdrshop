@@ -1,45 +1,43 @@
 import React, { useState } from "react";
-// import { useEffect } from 'react';
 import Form from "react-bootstrap/Form";
 import {Link} from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import "../../styles/Login.css";
-import { useAuth } from '../../context/auth-context';
+// import AppContext from "../../context/app-context";
+
 
 function Login() {
-   const { setCredentials } = useAuth();
+  //  const { setCredentials } = useApp();
  const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 
-// useEffect(() => {
-//  const fetchData = async () => {
-//    const result = await fetch(`http://localhost:3001/auth/login.json`);
-//  const jsonResult = await result.json()
-//  setEmail(jsonResult),
-//  setPassword(jsonResult),
-// }
-//  fetchData();
-//  },[])
 
  function validateForm() {
  return email.length > 0 && password.length > 0;
 }
- function handleLogin(event) {
- setCredentials({ email, password });
-    
-
-
-
-    return ( 
-    
-      <div onClick={handleLogin}>
-        
-        Hello World 
-        
-      </div> 
-      
-    ); 
+ async function handleLogin(event) {
+ const user = await postLogin(email, password)
+ console.log(user);
+//  appeler le setUser du app context 
   }
+  
+ async function postLogin(email, password) {
+  try {
+    const reponse = await fetch("http://localhost:3001/login", {
+      method: "POST",
+      headers: {
+         "Content-Type": "application/json",
+      },
+      body: JSON.stringify({email, password}),
+  });
+
+    const resultat = await reponse.json();
+    console.log("Réussite :", resultat);
+  } catch (erreur) {
+    console.error("Erreur :", erreur);
+  }
+  
+}
  return (
   <div className="Login">
      <Form onSubmit={handleLogin}>
