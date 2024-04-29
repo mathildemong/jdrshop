@@ -1,5 +1,5 @@
 class User{
-    constructor(userId, role, name, surname, adress, country, postcode, city, phone, mail, password){
+    constructor(userId, role, name, surname, adress, country, postcode, city, phone, email, password){
         this.userId = userId;
         this.role = role;
         this.username = name;
@@ -9,7 +9,7 @@ class User{
         this.city = city;
         this.adress = adress;
         this.phone = phone;
-        this.mail = mail;
+        this.email = email;
         this.password = password;
         //this.creationDate = creationDate; //Creation Date is infer in userId
 

@@ -1,6 +1,6 @@
 const express = require("express");
 const {
-  addUser,
+  subscribe,
   getUser,
   login,
   updateUser,
@@ -9,7 +9,7 @@ const {
 } = require("../controllers/user");
 const router = express.Router();
 
-router.route("/adduser").post(addUser);
+router.route("/adduser").post(subscribe);
 router.route("/login").post(login);
 router.route("/user/:id").get(getUser);
 router.route("/users").get(getAllUsers);

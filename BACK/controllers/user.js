@@ -6,12 +6,13 @@ const {
   User
 } = require("../models/user");
 
-const addUser = async (req, res) => {
+const subscribe = async (req, res) => {
   try {
     const user = new User(
-      req.body.name,
+      req.body.email,
       req.body.adress,
-      req.body.phone,
+      req.body.name,
+      req.body.password,
     );
     const result = await client
       .bd()
@@ -85,6 +86,7 @@ const login = async (req, res) => {
   }
 };
 
+
 const updateUser = async (req, res) => {
   try {
     const id = new ObjectId(req.params.id);
@@ -143,9 +145,10 @@ const deleteUser = async (req, res) => {
 };
 
 module.exports = {
-  addUser,
+  
   getAllUsers,
   login,
+  subscribe,
   getUser,
   updateUser,
   deleteUser,
