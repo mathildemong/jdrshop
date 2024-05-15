@@ -6,13 +6,59 @@ const {
   deleteProduct,
 } = require('./products')
 
+const Product = require('../models/products')
+const mockInsertOne = jest.fn()
+jest.mock('mongodb', () => {
+  return {
+    Db: jest.fn().mockImplementation(() => ({
+      collection : () => {
+        return {
+          insertOne: mockInsertOne
+        }
+      }
+    }))
+  }
+})
+
+const mockErrorLog = jest.spyOn(console, 'error')
+const jsonMock = jest.fn()
+const statusMock = jest.fn().mockReturnThis()
+
 describe('The Product Controller', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+  })
   describe('the `addProduct` method', () => {
-    test('should add a product and return its id if no error',  () => {
-      // to do
+    const request = {
+      body: {
+        name: 'Test Product Name',
+        category: 'Test Category'
+      }
+    }
+    test('should add a product and return its id if no error',  async () => {
+      mockInsertOne.mockResolvedValue(({
+        _id: 42
+      }))
+      const mockResponse = {
+        json: jsonMock,
+        status: statusMock
+      }
+      await addProduct(request, mockResponse)
+      expect(jsonMock).toHaveBeenCalledWith({
+        _id: 42
+      })
+      expect(mockInsertOne).toHaveBeenCalledWith(expect.any(Object))
     })
-    test('should throw an error if something goes wrong', () => {
-      // to do
+    test('should log an error if something goes wrong and not throw',async  () => {
+      mockInsertOne.mockRejectedValue(new Error('Uh-oh'))      
+      const mockResponse = {
+        json: jsonMock,
+        status: statusMock
+      }
+      await addProduct(request, mockResponse)
+      expect(statusMock).toHaveBeenCalledWith(500)
+      expect(jsonMock).toHaveBeenCalledWith('Uh-oh')
+      expect(mockErrorLog).toHaveBeenCalled()
     })
   })
 

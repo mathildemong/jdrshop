@@ -18,8 +18,8 @@ const addProduct = async (req, res) => {
       .insertOne(product);
     return res.status(200).json(result);
   } catch (error) {
-    console.log(error);
-   return res.status(500).json(error);
+    console.error(error);
+   return res.status(500).json(error.message);
   }
 };
 
