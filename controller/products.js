@@ -1,6 +1,6 @@
 const { ObjectID } = require("bson");
 const client = require("../bd/connect");
-const { User } = require("../models/products");
+const { Product } = require("../models/products");
 
 const addProduct = async (req, res) => {
   try {
