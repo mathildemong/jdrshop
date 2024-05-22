@@ -18,6 +18,7 @@ const [password, setPassword] = useState("");
  async function handleLogin(event) {
  const user = await postLogin(email, password)
  console.log(user);
+ event.preventDefault();
 //  appeler le setUser du app context 
   }
   

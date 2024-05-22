@@ -1,11 +1,11 @@
 import React from "react";
 import '../styles/Shop.css'
-import data from "../datas/list.jsx";
+
 
 const Shop = () => {
 
   const [data, setData] = React.useState([]);
-   React.useEffect(() => {
+React.useEffect(() => {
     fetch("/api")
       .then((res) => res.json())
       .then((data) => setData(data.message));

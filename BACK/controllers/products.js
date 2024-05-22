@@ -10,7 +10,7 @@ const addProduct = async (req, res) => {
   try {
     const product = new Product(
       req.body.name,
-      req.body.category
+      req.body.controller
     );
     const result = await client
       .bd()
