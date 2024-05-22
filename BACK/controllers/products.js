@@ -10,7 +10,7 @@ const addProduct = async (req, res) => {
   try {
     const product = new Product(
       req.body.name,
-      req.body.category
+      req.body.controller
     );
     const result = await client
       .bd()
@@ -18,8 +18,8 @@ const addProduct = async (req, res) => {
       .insertOne(product);
     return res.status(200).json(result);
   } catch (error) {
-    console.log(error);
-   return res.status(500).json(error);
+    console.error(error);
+   return res.status(500).json(error.message);
   }
 };
 
