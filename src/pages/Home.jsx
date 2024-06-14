@@ -13,7 +13,7 @@ function Home() {
 <div>  <Link to="/"><img src={Logo} alt="logo"/></Link></div>
         <p>Bienvenue dans notre univers</p>
         <Link to='/shop'>
-        <button>order now</button>
+        <button>Boutique</button>
         </Link>
         </div>
         </div>

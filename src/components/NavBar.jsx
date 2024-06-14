@@ -16,8 +16,8 @@ function Navbar() {
       <div className="leftSide" id={openLinks ? "open" : "close"}>
        <div>  <Link to="/"><img src={Logo} alt="logo"/></Link></div>
         <div className="hiddenLinks">
-    <Link to="/">Home </Link>
-        <Link to="/Shop"> Shop </Link>
+    <Link to="/"> Accueil </Link>
+        <Link to="/Shop"> Boutique </Link>
         <Link to="/login"> Login </Link>
       <Link to="/cart">
            <ShoppingCart size={25}/>
@@ -29,8 +29,8 @@ function Navbar() {
       </div>
       <div className="rightSide">
   <div className="links">
-    <Link to="/"> Home </Link>
-        <Link to="/Shop"> Shop </Link>
+    <Link to="/"> Accueil </Link>
+        <Link to="/Shop"> Boutique </Link>
         <Link to="/login"> Login </Link>
      <Link to="/cart"><ShoppingCart size={25}/>
          </Link>
