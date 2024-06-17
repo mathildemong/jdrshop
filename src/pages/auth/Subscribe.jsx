@@ -50,6 +50,7 @@ export default function Subscribe() {
     };
 
     const handleSubmit = async e => {
+        if(this.item === undefined) {return}
         e.preventDefault();
         setFormError(verifyInput(formValues));
 
@@ -74,14 +75,14 @@ export default function Subscribe() {
 
     return (
         <main className="main">
-            {Object.keys(formError).length === 0 && isSubmit && <div className='registration'>You have been successfully registered !</div>}
+            {Object.keys(formError).length === 0 && isSubmit && <div className='registration'>Vous avez ete enregistré avec succes </div>}
             <form className="main_form">
-                <h1>Register</h1>
+                <h1>S'enregistrer</h1>
                 <div className="main_form_group">
                     <label
                         htmlFor="lastname"
                         className={formValues.lastname && 'animLabel'}>
-                        Lastname
+                        Nom
                     </label>
                     <input
                         type="lastname"
@@ -96,7 +97,7 @@ export default function Subscribe() {
                     <label
                         htmlFor="firstname"
                         className={formValues.firstname && 'animLabel'}>
-                        Firstname
+                        Prenom
                     </label>
                     <input
                         type="firstname"
@@ -123,13 +124,11 @@ export default function Subscribe() {
                 </div>
                     {formError.email && <p className="inputError">{formError.email}</p>}
                 <div className="main_form_group">
-                    <button className="main_form_group_icon" aria-label="show / hidden password" onClick={showPassword}>
-                        {toggle ? <VisibilityOffIcon sx={{ fontSize: "25px" }} /> : <VisibilityIcon sx={{ fontSize: "25px" }} />}
-                    </button>
+                   
                     <label
                         htmlFor="password"
                         className={formValues.password && 'animLabel'}>
-                        Password
+                        Mot de passe
                     </label>
                     <input
                         type={toggle ? "text" : "password"}
@@ -138,10 +137,13 @@ export default function Subscribe() {
                         value={formValues.password}
                         onChange={handleChange}
                     />
+                     <button className="main_form_group_icon" aria-label="show / hidden password" onClick={showPassword}>
+                        {toggle ? <VisibilityOffIcon sx={{ fontSize: "15px" }} /> : <VisibilityIcon sx={{ fontSize: "15px" }} />}
+                    </button>
                 </div>
                     {formError.password && <p className="inputError">{formError.password}</p>}
-                <input type="submit" value="Submit" className="btn" onClick={handleSubmit} />
-                <h2>Already registered ? <Link to="/login" >Login</Link></h2>
+                <input type="submit" value="Ok" className="btn" onClick={handleSubmit} />
+                <h2>Deja enregistré ? <Link to="/login" >Se connecter</Link></h2>
             </form>
         </main>
     )
