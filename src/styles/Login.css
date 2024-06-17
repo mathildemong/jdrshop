@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .Login{
     height: 90vh;
     display: flex;
@@ -7,3 +8,14 @@
 }
 
 
+=======
+.Login{
+    height: 90vh;
+    display: flex;
+  flex-direction: column;
+ margin-top: 200px;
+
+}
+
+
+>>>>>>> main

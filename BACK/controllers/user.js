@@ -23,6 +23,7 @@ const { User } = require("../models/user");
 //       })
 //       .catch(error => res.status(500).json({ error }));
 // };
+
 const subscribe = async (req, res) => {
   try {
     const user = new User(
@@ -173,6 +174,10 @@ const deleteUser = async (req, res) => {
   }
 };
 
+const home = (_, res) => {
+  res.status(200).json({ message: "Welcome to the home page !" });
+};
+
 module.exports = {
   getAllUsers,
   login,
@@ -180,8 +185,7 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
+  home
 };
 
-exports.home = (req, res) => {
-  res.status(200).json({ message: "Welcome to the home page !" });
-};
+

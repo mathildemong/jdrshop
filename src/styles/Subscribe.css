@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .Subscribe{
     height: 90vh;
     display: flex;
@@ -16,4 +17,24 @@ form{
 .name{
     margin: 10px;
     padding-bottom: 10px;
+=======
+.Subscribe{
+    height: 90vh;
+    display: flex;
+  flex-direction: column;
+ margin-top: 200px;
+
+}
+
+
+
+form{
+    margin: 10px;
+
+}
+
+.name{
+    margin: 10px;
+    padding-bottom: 10px;
+>>>>>>> main
 }
