@@ -5,10 +5,11 @@ module.exports = (req, res, next) => {
     try {
         const token = req.headers.authorization.split(' ')[1];
         const decodedToken = jwt.verify(token, KEY);
-        const userId = decodedToken.userId;
+        const email = decodedToken.email;
         req.auth = {
-            userId: userId
+            userEmail: email
         };
+        console.log('Hello', email)
         next();
     } catch (error) {
         res.status(401).json({ error });

@@ -6,10 +6,12 @@ const {
   updateUser,
   deleteUser,
   getAllUsers,
+  register
 } = require("../controllers/user");
 const router = express.Router();
 
 router.route("/adduser").post(subscribe);
+router.route("/register").post(register)
 router.route("/login").post(login);
 router.route("/user/:id").get(getUser);
 router.route("/users").get(getAllUsers);

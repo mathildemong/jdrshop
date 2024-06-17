@@ -1,28 +1,37 @@
-// const bcrypt = require('bcrypt');
-// const User = require('../models/user');
-// const jwt = require('jsonwebtoken');
-// const KEY = process.env.SECRET_KEY;
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const KEY = process.env.SECRET_KEY;
 
 const { ObjectId } = require("mongodb");
 const client = require("../connect");
 const { User } = require("../models/user");
+const { response } = require('express');
 
-// exports.register = (req, res) => {
-//   const { email, password, lastname, firstname } = req.body;
-//   bcrypt.hash(password, 10)
-//       .then(hash => {
-//           const user = new User({
-//               lastname: lastname,
-//               firstname: firstname,
-//               email: email,
-//               password: hash
-//           });
-//           user.save()
-//               .then(() => res.status(201).json({ message: 'User created !' }))
-//               .catch(error => res.status(400).json({ error }));
-//       })
-//       .catch(error => res.status(500).json({ error }));
-// };
+const register = async (req, res) => {
+  const { email, password, lastname, firstname } = req.body;
+  try {
+  const hash = await bcrypt.hash(password, 10)
+  const user = new User({
+      lastname: lastname,
+      firstname: firstname,
+      email: email,
+      password: hash})
+
+  // Generate JWT access_token and refresh_token
+  const token = jwt.sign({lastname,
+    firstname,
+    email,
+    password: hash}, KEY)
+    await client.bd().collection("users").insertOne(user);
+    return res.status(200).json({
+      message: 'Welcome',
+      accessToken: token
+    })
+  } catch (err){
+    console.log(err)
+    return res.status(500).json(err)
+  }
+};
 
 const subscribe = async (req, res) => {
   try {
@@ -185,7 +194,8 @@ module.exports = {
   getUser,
   updateUser,
   deleteUser,
-  home
+  home,
+  register
 };
 
 
