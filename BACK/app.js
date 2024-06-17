@@ -1,5 +1,7 @@
 const express = require("express");
 const { connect } = require("./connect");
+require('dotenv').config();
+
 // Routes for router
 const userRoutes = require("./routes/user");
 const productRoutes = require("./routes/product");
@@ -11,9 +13,23 @@ app.use(express.json());
 app.use("/api/v1", userRoutes);
 app.use("/api/v1", productRoutes);
 
-// Please replace the following url with what you use :)
+
+// connect(
+//   "mongodb+srv://mmonguillon:mercure10@jdrshop.vpc0shq.mongodb.net",
+//   (erreur) => {
+//     if (erreur) {
+//       console.log("erreur a la conection a la base de donnee");
+//       process.exit(-1);
+//     } else {
+//       console.log("connection avec la base de donnee etablie");
+//       app.listen(3000);
+//       console.log("attente des requetes du port 3000");
+//     }
+//   }
+// );
+
 connect(
-  "mongodb+srv://mmonguillon:mercure10@jdrshop.vpc0shq.mongodb.net",
+  "mongodb://root:example@localhost:27017",
   (erreur) => {
     if (erreur) {
       console.log("erreur a la conection a la base de donnee");
@@ -26,7 +42,6 @@ connect(
   }
 );
 
-// require('dotenv').config();
 // const express = require('express');
 // const app = express();
 // const helmet = require('helmet');
