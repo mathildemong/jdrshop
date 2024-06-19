@@ -1,5 +1,4 @@
 .navbar {
-    width: 100%;
     height: 100px;
     background-color: #121619;
     display: flex;
@@ -95,7 +94,6 @@
   
     .navbar .rightSide {
       justify-content: flex-end;
-      padding-right: 50px;
     }
   
     .navbar .rightSide button {
