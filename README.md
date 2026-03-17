@@ -1,70 +1,112 @@
-# Getting Started with Create React App
+# 🐉 JDR Shop
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![React](https://img.shields.io/badge/Frontend-React-blue?logo=react)
+![Node.js](https://img.shields.io/badge/Backend-Node.js-green?logo=node.js)
+![npm](https://img.shields.io/badge/Package_Manager-npm-red?logo=npm)
+![Status](https://img.shields.io/badge/Status-En%20cours-yellow)
 
-## Available Scripts
+> 🛒 Site de vente d’accessoires pour jeux de rôle (Dungeons & Dragons, etc.)
 
-In the project directory, you can run:
+---
 
-### `npm start`
+## 📖 Description
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**JDR Shop** est une application web e-commerce dédiée aux passionnés de jeux de rôle.  
+Elle permet d’acheter des accessoires comme des dés, figurines et fiches de personnage.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Le projet utilise une architecture **fullstack avec React (frontend) et Node.js (backend)**.
 
-### `npm test`
+---
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## ✨ Fonctionnalités
 
-### `npm run build`
+- 🛍️ Boutique de produits JDR  
+- 👤 Création de compte utilisateur  
+- 🔐 Connexion utilisateur  
+- 🔄 CRUD utilisateur (Create, Read, Update, Delete)  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+---
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## 🛠️ Technologies utilisées
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- ⚛️ React  
+- 🌐 Node.js  
+- 📦 npm  
 
-### `npm run eject`
+---
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🚀 Installation
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+git clone https://github.com/mathildemong/jdr-shop.git
+cd jdr-shop
+npm install
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+---
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 💻 Utilisation
 
-## Learn More
+### Exemple CRUD utilisateur
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+#### Créer un utilisateur
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```http
+POST /api/users
+```
 
-### Code Splitting
+#### Lire les utilisateurs
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```http
+GET /api/users
+```
 
-### Analyzing the Bundle Size
+#### Modifier un utilisateur
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+```http
+PUT /api/users/:id
+```
 
-### Making a Progressive Web App
+#### Supprimer un utilisateur
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+```http
+DELETE /api/users/:id
+```
 
-### Advanced Configuration
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 📂 Structure du projet
 
-### Deployment
+```
+/client   → Frontend React  
+/server   → Backend Node.js  
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+---
 
-### `npm run build` fails to minify
+## 🚧 Améliorations possibles
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- 🛒 Ajouter un panier  
+- 💳 Intégrer un paiement  
+- 🔐 Authentification JWT  
+- 📦 Gestion des commandes  
+
+---
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues !
+
+---
+
+## 📜 Licence
+
+Aucune licence définie
+
+---
+
+## 📬 Auteur
+
+👩‍💻 Mathilde Mong  
+Projet autour des jeux de rôle 🐲
